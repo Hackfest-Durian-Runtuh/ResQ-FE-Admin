@@ -1,34 +1,39 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Res-Q
+Sistem Pemanggilan Layanan Darurat Terpadu ini dirancang untuk mempercepat dan meningkatkan efisiensi penanganan gawat darurat di berbagai negara berkembang seperti Indonesia.
 
-## Getting Started
+## Deskripsi
+Sistem ini memungkinkan pengguna untuk dapat mengakses nomor berbagai unit layanan darurat (ambulans, pemadam kebakaran, bantuan SAR, dan kepolisian) di setiap daerah. 
 
-First, run the development server:
+Aplikasi juga memungkinkan pengguna menyimpan informasi pribadi serta rekam medis yang telah diisi sebelumnya Pre-Filled Information. Informasi tersebut akan secara otomatis terkirim saat panggilan darurat dilakukan tanpa perlu penyampaian secara berulang.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+Selain itu, terdapat fitur Live Tracking sehingga pengguna dan petugas lapangan dapat saling terhubung dan mendapatkan informasi update secara berkala terkait lokasi dan status penanganan.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tech Stack
+Teknologi yang digunakan untuk App Client dan Driver:
+- Firebase
+- Kotlin (Jetpack Compose)
+- Ktor untuk HTTP Client
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Teknologi yang digunakan untuk Web Admin:
+- Firebase
+- NextJS
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Output
 
-## Learn More
+ - App Client: https://drive.google.com/file/d/1Vo8D_Az0xMTnkR7YVcAp2s6V3XpK2J2M/view?usp=sharing
+ - App Driver: https://drive.google.com/file/d/1i2Dney8yWIY0H10hv9FczA_UdcSz8QWC/view?usp=sharing
+ - Website Admin: https://resq-admin.vercel.app/
 
-To learn more about Next.js, take a look at the following resources:
+## Penggunaan
+### > Client
+Untuk penggunaan, registrasi sudah bisa dengan menggunakan nomor asli (OTP Sudah bekerja).  Namun jika ingin menggunakan nomor demo, dapat menggunakan:
+ - nomor: +6281-553-993-193 
+ - OTP: 123456
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### > Driver
+Masuk secara langsung dengan menekan tombol pada driver yang diinginkan
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### > Admin
+Masuk dengan meng-*copy* id dari penyedia layanan emergency, kemudian *paste* di form yang disediakan. Kemudian masuk.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Screenshot dari Repository ini (Website Admin) 
