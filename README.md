@@ -1,3 +1,4 @@
+
 # Res-Q
 Sistem Pemanggilan Layanan Darurat Terpadu ini dirancang untuk mempercepat dan meningkatkan efisiensi penanganan gawat darurat di berbagai negara berkembang seperti Indonesia.
 
@@ -37,3 +38,12 @@ Masuk secara langsung dengan menekan tombol pada driver yang diinginkan
 Masuk dengan meng-*copy* id dari penyedia layanan emergency, kemudian *paste* di form yang disediakan. Kemudian masuk.
 
 ## Screenshot dari Repository ini (Website Admin) 
+
+
+<img src="https://github.com/Hackfest-Durian-Runtuh/ResQ-FE-Admin/blob/master/ss/login.JPG?raw=true" alt="drawing" width="1000"/>
+
+<img src="https://github.com/Hackfest-Durian-Runtuh/ResQ-FE-Admin/blob/master/ss/logged_in.JPG?raw=true" alt="drawing" width="1000"/>
+
+<img src="https://github.com/Hackfest-Durian-Runtuh/ResQ-FE-Admin/blob/master/ss/lihat_pemohon.JPG?raw=true" alt="drawing" width="1000"/>
+
+<img src="https://github.com/Hackfest-Durian-Runtuh/ResQ-FE-Admin/blob/master/ss/kirim_petugas.JPG?raw=true" alt="drawing" width="1000"/>
