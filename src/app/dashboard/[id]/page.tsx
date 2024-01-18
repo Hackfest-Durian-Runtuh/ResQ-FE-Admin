@@ -3,7 +3,7 @@
 import { CallStatus } from "@/constant/call_status"
 import { EmCallStatus, EmCallStruct, EmProviderStruct, EmTransportStruct, EmTypeStruct, Repository, UserStruct } from "@/data/repository"
 import { Box, Button, Icon, Modal } from "@mui/material"
-import { useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import { Loading, Notify } from "notiflix"
 import React from "react"
 import { Component, ReactNode, useEffect, useState } from "react"
@@ -13,6 +13,7 @@ export default function DashboardScreen() {
     const params = useParams()
     const id = params.id.toString()
     const repository = new Repository()
+    const router = useRouter()
     const [datas, setDatas] = useState<EmCallStruct[]>([])
     const [emPvd, setEmPvd] = useState<EmProviderStruct>({
         em_pvd_id: "",
@@ -127,10 +128,13 @@ export default function DashboardScreen() {
     return (
         <div>
             <div className="h-screen bg-slate-200">
-                <div className="flex justify-end items-center w-full h-[96px] bg-slate-300">
+                <div className="flex justify-end items-center w-full h-[150px] bg-slate-300">
                     <div className="flex flex-col px-[32px] items-end">
                         <p className="text-[32px]">{emPvd.name}</p>
                         <p>Kategori : {emType.word}</p>
+                        <Button variant="contained" className="bg-red-600 mt-[8px]" onClick={() => {
+                            router.push('/login')
+                        }}>Keluar</Button>
                     </div>
                 </div>
                 <div className="mx-[32px] my-[32px]">
@@ -306,19 +310,72 @@ export default function DashboardScreen() {
                 className="flex justify-center items-center"
             >
                 <Box>
-                    <div className="p-[32px] space-y-[16px] overflow-auto flex flex-col items-center justify-center bg-white rounded-sm">
+                    <div className="p-[32px] space-y-[16px] overflow-auto flex flex-col bg-white rounded-sm">
+                        <p className="text-[20px] font-bold">Titik Lokasi Kejadian</p>
+                        <iframe
+                            width="800"
+                            height="350"
+                            src={`https://www.openstreetmap.org/export/embed.html?bbox=${pickedEmCall?.user_long}%2C${pickedEmCall?.user_lat}%2C${pickedEmCall?.user_long}%2C${pickedEmCall?.user_lat}`}
+                            loading="lazy"
+                        ></iframe>
                         <p className="text-[20px] font-bold">Detail Pemohon</p>
-                        <div>
-                            <p>NIK: {singleUserStruct?.nik}</p>
-                            <p>Nama: {singleUserStruct?.name}</p>
-                            <p>Nomor HP: {singleUserStruct?.phone_number}</p>
-                            <a href={`https://maps.google.com/?q=${pickedEmCall?.user_lat},${pickedEmCall?.user_long}`} target="_blank">
-                                <Button
-                                    variant="contained"
-                                    className="bg-lime-600 w-full"
-                                >Cek Lokasi</Button>
-                            </a>
+                        <div className="flex space-x-[48px]">
+                            <div>
+                                <p className="text-[16px] font-bold">Informasi Dasar</p>
+                                <p>Nama Lengkap: {singleUserStruct?.fullname}</p>
+                                <p>Golongan Darah: {singleUserStruct?.golongan_darah}</p>
+                                <p>Umur: -</p>
+                                <p>Berat Badan: {singleUserStruct?.berat_badan} kg</p>
+                                <p>Tinggi Badan: {singleUserStruct?.tinggi_badan} cm</p>
+                                <p>NIK: {singleUserStruct?.nik}</p>
+                                <p>Tempat Lahir: {singleUserStruct?.tempat_lahir}</p>
+                                <p>Tanggal Lahir: {singleUserStruct?.tanggal_lahir}</p>
+                            </div>
+
+                            <div className="flex flex-col space-y-[24px]">
+                                <div>
+                                    <p className="text-[16px] font-bold">Asuransi</p>
+                                    <p>Nama Asuransi: {singleUserStruct?.asuransi}</p>
+                                    <p>Nomor Asuransi: {singleUserStruct?.nomor_asuransi}</p>
+                                </div>
+                                <div>
+                                    <p className="text-[16px] font-bold">Riwayat Penyakit</p>
+
+                                    {singleUserStruct?.penyakit?.map((s) => {
+                                        return (
+                                            <div className="mb-[16px]">
+                                                <p>Nama Penyakit: {s.nama_penyakit}</p>
+                                                <p>Tahun Terkena Penyakit: {s.tahun_penyakit}</p>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            </div>
                         </div>
+                        <Button variant="contained" className=" bg-yellow-600" onClick={() => {
+                            Loading.circle()
+                            repository.changeCallStatus(
+                                pickedEmCall?.em_call_id ?? "",
+                                CallStatus.DIPROSES,
+                                () => {
+                                    Loading.remove()
+
+                                    //TODO This is not gonna works, because now uid and biodata_id is different. But there is still a lot of stuff that make it like same
+
+                                    // repository.sendNotificationToUser(
+                                    //     pickedEmCall?.uid ?? "",
+                                    //     "Panggilan Ditindak lanjuti",
+                                    //     "Panggilan sedang diproses, tunggu tindakan selanjutnya!",
+                                    //     () => {
+                                    //         //TODO
+                                    //     }
+                                    // )
+
+                                    setShowLihatPemohonModal(false)
+                                    Notify.success(`Status Panggilan ${pickedEmCall?.em_call_id} Berhasil Dirubah`)
+                                }
+                            )
+                        }}>Proses Panggilan</Button>
                     </div>
                 </Box>
             </Modal>

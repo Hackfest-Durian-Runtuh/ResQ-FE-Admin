@@ -9,8 +9,8 @@ export interface EmCallStruct {
   em_pvd_id: string,
   created_at: number,
   user_phone_number: string,
-  user_lat:string,
-  user_long:string,
+  user_lat: string,
+  user_long: string,
   uid: string
 }
 
@@ -40,9 +40,21 @@ export interface EmTransportStruct {
 
 export interface UserStruct {
   uid: string,
-  name: string,
-  phone_number: string,
-  nik: string
+  biodata_id: string,
+  fullname: string,
+  nickname: string,
+  tempat_lahir: string,
+  tanggal_lahir: string,
+  asuransi: string,
+  nomor_asuransi: string,
+  nik: string,
+  golongan_darah: string,
+  tinggi_badan: string,
+  berat_badan: string,
+  penyakit: {
+    nama_penyakit: string,
+    tahun_penyakit: string
+  }[]
 }
 
 export class Repository {
@@ -294,9 +306,18 @@ export class Repository {
     ).then(s => {
       onSuccess({
         uid: s.get("uid"),
-        name: s.get("name"),
+        biodata_id: s.get("biodata_id"),
+        fullname: s.get("fullname"),
+        nickname: s.get("nickname"),
+        tempat_lahir: s.get("tempat_lahir"),
+        tanggal_lahir: s.get("tanggal_lahir"),
+        asuransi: s.get("asuransi"),
+        nomor_asuransi: s.get("nomor_asuransi"),
         nik: s.get("nik"),
-        phone_number: s.get("phone_number")
+        golongan_darah: s.get("golongan_darah"),
+        tinggi_badan: s.get("tinggi_badan"),
+        berat_badan: s.get("berat_badan"),
+        penyakit: s.get("penyakit") || [],
       })
     }).catch(e => {
       console.log(e)

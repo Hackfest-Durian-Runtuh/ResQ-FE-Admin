@@ -23,8 +23,8 @@ export const CallStatusAction: React.FC<CallStatusActionProps> = ({
     switch (call_status_id) {
         case CallStatus.MENUNGGU_KONFIRMASI:
             return <div className="flex space-x-[8px]">
-                <Button variant="contained" className="w-[256px] bg-lime-600" onClick={onLihatPemohonClick}>Lihat Pemohon</Button>
-                <Button variant="contained" className="w-[256px] bg-blue-600" onClick={onProsesPanggilanClick}>Proses Panggilan</Button>
+                <Button variant="contained" className="w-[512px] bg-lime-600" onClick={onLihatPemohonClick}>Lihat Pemohon</Button>
+                {/* <Button variant="contained" className="w-[256px] bg-blue-600" onClick={onProsesPanggilanClick}>Proses Panggilan</Button> */}
             </div>
         case CallStatus.DIPROSES: {
             if (em_transport_id == ".") {
